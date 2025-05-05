@@ -7,7 +7,7 @@ const MonthYearExample = () => {
     <DatePicker
       mode="monthYear"
       selectorStartingYear={2000}
-      onMonthYearChange={date => alert(date)}
+      onMonthYearChange={(date) => alert(date)}
     />
   );
 };

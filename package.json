@@ -4,7 +4,8 @@
   "description": "A customizable calendar, time & month picker for React Native (including Persian Jalaali calendar & locale)",
   "main": "src/index.js",
   "scripts": {
-    "playground": "cd playground && react-native start"
+    "playground": "cd playground && react-native start",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
   },
   "files": [
     "src"
@@ -47,11 +48,11 @@
     "react-native": ">=0.59"
   },
   "devDependencies": {
-    "prettier": "^1.18.2",
     "@babel/core": "^7.5.5",
     "@babel/runtime": "^7.5.5",
     "@react-native-community/eslint-config": "^0.0.5",
     "eslint": "^6.3.0",
-    "metro-react-native-babel-preset": "^0.56.0"
+    "metro-react-native-babel-preset": "^0.56.0",
+    "prettier": "^3.5.3"
   }
 }

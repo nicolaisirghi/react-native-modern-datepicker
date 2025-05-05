@@ -1,4 +1,4 @@
-@import "./Prism.css";
+@import './Prism.css';
 
 .Code > pre {
   max-width: 40em;

@@ -34,7 +34,8 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Star HosseinShabani/react-native-modern-datepicker on GitHub"
-            className="Footer__starBtn">
+            className="Footer__starBtn"
+          >
             <i className="icon-star Footer__starBtnIcon"></i>
             <h2 className="-title">Star on GitHub</h2>
           </a>

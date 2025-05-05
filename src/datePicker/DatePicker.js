@@ -41,62 +41,116 @@ const useCalendar = () => {
   return contextValue;
 };
 
-const DatePicker = props => {
-  const calendarUtils = new utils(props);
+const DatePicker = ({
+  onSelectedChange = () => null,
+  onMonthYearChange = () => null,
+  onTimeChange = () => null,
+  onDateChange = () => null,
+  current = '',
+  selected = '',
+  minimumDate = '',
+  maximumDate = '',
+  selectorStartingYear = 0,
+  selectorEndingYear = 3000,
+  disableDateChange = false,
+  isGregorian = true,
+  configs = {},
+  reverse = 'unset',
+  options: userOptions = {},
+  mode = 'datepicker',
+  minuteInterval = 5,
+  style: userStyle = {},
+}) => {
+  const calendarUtils = new utils({
+    onSelectedChange,
+    onMonthYearChange,
+    onTimeChange,
+    onDateChange,
+    current,
+    selected,
+    minimumDate,
+    maximumDate,
+    selectorStartingYear,
+    selectorEndingYear,
+    disableDateChange,
+    isGregorian,
+    configs,
+    reverse,
+    options: userOptions,
+    mode,
+    minuteInterval,
+    style: userStyle,
+  });
+
   const contextValue = {
-    ...props,
-    reverse: props.reverse === 'unset' ? !props.isGregorian : props.reverse,
-    options: {...options, ...props.options},
+    onSelectedChange,
+    onMonthYearChange,
+    onTimeChange,
+    onDateChange,
+    current,
+    selected,
+    minimumDate,
+    maximumDate,
+    selectorStartingYear,
+    selectorEndingYear,
+    disableDateChange,
+    isGregorian,
+    configs,
+    reverse: reverse === 'unset' ? !isGregorian : reverse,
+    options: {...options, ...userOptions},
+    mode,
+    minuteInterval,
+    style: userStyle,
     utils: calendarUtils,
     state: useReducer(reducer, {
-      activeDate: props.current || calendarUtils.getToday(),
-      selectedDate: props.selected
-        ? calendarUtils.getFormated(calendarUtils.getDate(props.selected))
-        : '',
-      monthOpen: props.mode === 'monthYear',
-      timeOpen: props.mode === 'time',
+      activeDate: current || calendarUtils.getToday(),
+      selectedDate: selected ? calendarUtils.getFormated(calendarUtils.getDate(selected)) : '',
+      monthOpen: mode === 'monthYear',
+      timeOpen: mode === 'time',
     }),
   };
+
   const [minHeight, setMinHeight] = useState(300);
   const style = styles(contextValue.options);
 
   const renderBody = () => {
     switch (contextValue.mode) {
-      default:
-      case 'datepicker':
-        return (
-          <React.Fragment>
-            <Calendar />
-            <SelectMonth />
-            <SelectTime />
-          </React.Fragment>
-        );
       case 'calendar':
         return (
-          <React.Fragment>
+          <>
             <Calendar />
             <SelectMonth />
-          </React.Fragment>
+          </>
         );
       case 'monthYear':
         return <SelectMonth />;
       case 'time':
         return <SelectTime />;
+      case 'datepicker':
+      default:
+        return (
+          <>
+            <Calendar />
+            <SelectMonth />
+            <SelectTime />
+          </>
+        );
     }
   };
 
   return (
     <CalendarContext.Provider value={contextValue}>
       <View
-        style={[style.container, {minHeight}, props.style]}
-        onLayout={({nativeEvent}) => setMinHeight(nativeEvent.layout.width * 0.9 + 55)}>
+        style={[style.container, {minHeight}, userStyle]}
+        onLayout={({nativeEvent}) => setMinHeight(nativeEvent.layout.width * 0.9 + 55)}
+      >
         {renderBody()}
       </View>
     </CalendarContext.Provider>
   );
 };
 
-const styles = theme =>
+const styles = (theme) =>
   StyleSheet.create({
     container: {
       backgroundColor: theme.backgroundColor,
@@ -123,27 +177,6 @@ const optionsShape = {
 };
 const modeArray = ['datepicker', 'calendar', 'monthYear', 'time'];
 const minuteIntervalArray = [1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60];
-
-DatePicker.defaultProps = {
-  onSelectedChange: () => null,
-  onMonthYearChange: () => null,
-  onTimeChange: () => null,
-  onDateChange: () => null,
-  current: '',
-  selected: '',
-  minimumDate: '',
-  maximumDate: '',
-  selectorStartingYear: 0,
-  selectorEndingYear: 3000,
-  disableDateChange: false,
-  isGregorian: true,
-  configs: {},
-  reverse: 'unset',
-  options: {},
-  mode: 'datepicker',
-  minuteInterval: 5,
-  style: {},
-};
 
 DatePicker.propTypes = {
   onSelectedChange: PropTypes.func,

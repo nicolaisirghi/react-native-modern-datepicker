@@ -51,7 +51,7 @@ const SelectMonth = () => {
     show && setYear(utils.getMonthYearText(mainState.activeDate).split(' ')[1]);
   }, [mainState.activeDate, utils, show]);
 
-  const onSelectMonth = month => {
+  const onSelectMonth = (month) => {
     if (show) {
       let y = Number(utils.toEnglish(year));
       const date = utils.getDate(utils.validYear(mainState.activeDate, y));
@@ -75,13 +75,13 @@ const SelectMonth = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prevDisable, nextDisable]);
 
-  const onChangeYear = text => {
+  const onChangeYear = (text) => {
     if (Number(utils.toEnglish(text))) {
       setYear(utils.toPersianNumber(text));
     }
   };
 
-  const onSelectYear = number => {
+  const onSelectYear = (number) => {
     let y = Number(utils.toEnglish(year)) + number;
     if (y > selectorEndingYear) {
       y = selectorEndingYear;
@@ -112,7 +112,8 @@ const SelectMonth = () => {
         <TouchableOpacity
           activeOpacity={0.7}
           style={style.arrowWrapper}
-          onPress={() => !nextDisable && onSelectYear(-1)}>
+          onPress={() => !nextDisable && onSelectYear(-1)}
+        >
           <Image
             source={require('../../assets/arrow.png')}
             style={[style.arrow, style.leftArrow, nextDisable && style.disableArrow]}
@@ -134,7 +135,8 @@ const SelectMonth = () => {
         <TouchableOpacity
           activeOpacity={0.7}
           style={style.arrowWrapper}
-          onPress={() => !prevDisable && onSelectYear(+1)}>
+          onPress={() => !prevDisable && onSelectYear(+1)}
+        >
           <Image
             source={require('../../assets/arrow.png')}
             style={[style.arrow, prevDisable && style.disableArrow]}
@@ -143,20 +145,22 @@ const SelectMonth = () => {
       </View>
 
       <View style={[style.monthList, utils.flexDirection]}>
-        {[...Array(12).keys()].map(item => {
+        {[...Array(12).keys()].map((item) => {
           const disabled = utils.checkSelectMonthDisabled(mainState.activeDate, item);
           return (
             <TouchableOpacity
               key={item}
               activeOpacity={0.8}
               style={[style.item, currentMonth === item + 1 && style.selectedItem]}
-              onPress={() => !disabled && onSelectMonth(item)}>
+              onPress={() => !disabled && onSelectMonth(item)}
+            >
               <Text
                 style={[
                   style.itemText,
                   currentMonth === item + 1 && style.selectedItemText,
                   disabled && style.disabledItemText,
-                ]}>
+                ]}
+              >
                 {utils.getMonthName(item)}
               </Text>
             </TouchableOpacity>
@@ -167,7 +171,7 @@ const SelectMonth = () => {
   ) : null;
 };
 
-const styles = theme =>
+const styles = (theme) =>
   StyleSheet.create({
     container: {
       position: 'absolute',

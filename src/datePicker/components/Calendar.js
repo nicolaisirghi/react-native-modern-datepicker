@@ -21,7 +21,7 @@ const Calendar = () => {
     <View style={style.container}>
       <Header changeMonth={changeMonthAnimation} />
       <View style={[style.daysName, utils.flexDirection]}>
-        {utils.config.dayNamesShort.map(item => (
+        {utils.config.dayNamesShort.map((item) => (
           <Text key={item} style={style.daysNameText}>
             {item}
           </Text>
@@ -36,7 +36,7 @@ const Calendar = () => {
   );
 };
 
-const styles = theme =>
+const styles = (theme) =>
   StyleSheet.create({
     container: {
       flexDirection: 'column',

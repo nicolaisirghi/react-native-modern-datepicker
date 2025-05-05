@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import './Table.css';
 
 const Table = ({headerData, data}) => {
-  const getHeaderTitleIdx = title => headerData.findIndex(item => item === title);
+  const getHeaderTitleIdx = (title) => headerData.findIndex((item) => item === title);
 
   return (
     <div className="TableWrapper">
@@ -21,7 +21,8 @@ const Table = ({headerData, data}) => {
                   '-large': index === descIndex,
                   '-small': index === typeIndex,
                 })}
-                key={index}>
+                key={index}
+              >
                 <h2 className="Table__fieldText">{item}</h2>
               </div>
             );

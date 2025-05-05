@@ -10,7 +10,7 @@ const Days = () => {
   const style = styles(options);
   const days = useMemo(() => utils.getMonthDays(mainState.activeDate));
 
-  const onSelectDay = date => {
+  const onSelectDay = (date) => {
     setMainState({
       type: 'set',
       selectedDate: date,
@@ -31,7 +31,8 @@ const Days = () => {
           style={{
             width: itemSize,
             height: itemSize,
-          }}>
+          }}
+        >
           {day && (
             <TouchableOpacity
               style={[
@@ -42,13 +43,15 @@ const Days = () => {
                 mainState.selectedDate === day.date && style.dayItemSelected,
               ]}
               onPress={() => !day.disabled && onSelectDay(day.date)}
-              activeOpacity={0.8}>
+              activeOpacity={0.8}
+            >
               <Text
                 style={[
                   style.dayText,
                   mainState.selectedDate === day.date && style.dayTextSelected,
                   day.disabled && style.dayTextDisabled,
-                ]}>
+                ]}
+              >
                 {day.dayString}
               </Text>
             </TouchableOpacity>
@@ -59,7 +62,7 @@ const Days = () => {
   );
 };
 
-const styles = theme =>
+const styles = (theme) =>
   StyleSheet.create({
     container: {
       width: '100%',

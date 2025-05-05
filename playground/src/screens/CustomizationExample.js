@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, Animated, Easing } from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, Animated, Easing} from 'react-native';
 import DatePicker from 'react-native-modern-datepicker';
 
-const CustomizationExample = ({ defaultOptions }) => {
+const CustomizationExample = ({defaultOptions}) => {
   const animatedOpacity = new Animated.Value(0);
   const animatedScale = new Animated.Value(1.02);
 

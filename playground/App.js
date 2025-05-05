@@ -96,7 +96,8 @@ const AppNavigator = createStackNavigator({
         // eslint-disable-next-line react-native/no-inline-styles
         style={{
           backgroundColor: '#090C08',
-        }}>
+        }}
+      >
         <CustomizationExample defaultOptions={defaultOptions} />
       </PageWrapper>
     ),

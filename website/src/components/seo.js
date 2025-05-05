@@ -12,20 +12,18 @@ import {useStaticQuery, graphql} from 'gatsby';
 
 import logoFavIcon from '../assets/images/favicon.png';
 
-function SEO({description, lang, meta, title}) {
-  const {site} = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+function SEO({description = '', lang = 'en', meta = [], title}) {
+  const {site} = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
         }
       }
-    `,
-  );
+    }
+  `);
 
   const metaDescription = description || site.siteMetadata.description;
 
@@ -81,17 +79,12 @@ function SEO({description, lang, meta, title}) {
           name: 'theme-color',
           content: '#05030e',
         },
-      ].concat(meta)}>
+      ].concat(meta)}
+    >
       <link rel="shortcut icon" href={logoFavIcon} />
     </Helmet>
   );
 }
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-};
 
 SEO.propTypes = {
   description: PropTypes.string,

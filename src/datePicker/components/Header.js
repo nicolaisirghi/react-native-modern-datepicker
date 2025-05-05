@@ -4,26 +4,16 @@ import {View, TouchableOpacity, Text, Image, StyleSheet, Animated, I18nManager} 
 
 import {useCalendar} from '../DatePicker';
 
-const Header = ({changeMonth}) => {
-  const {
-    options,
-    disableDateChange,
-    state,
-    utils,
-    minimumDate,
-    maximumDate,
-    isGregorian,
-    mode,
-  } = useCalendar();
+const Header = ({changeMonth = () => null}) => {
+  const {options, disableDateChange, state, utils, minimumDate, maximumDate, isGregorian, mode} =
+    useCalendar();
   const [mainState, setMainState] = state;
   const style = styles(options);
   const [disableChange, setDisableChange] = useState(false);
-  const [
-    {lastDate, shownAnimation, hiddenAnimation},
-    changeMonthAnimation,
-  ] = utils.useMonthAnimation(mainState.activeDate, options.headerAnimationDistance, () =>
-    setDisableChange(false),
-  );
+  const [{lastDate, shownAnimation, hiddenAnimation}, changeMonthAnimation] =
+    utils.useMonthAnimation(mainState.activeDate, options.headerAnimationDistance, () =>
+      setDisableChange(false),
+    );
   const prevDisable =
     disableDateChange || (minimumDate && utils.checkArrowMonthDisabled(mainState.activeDate, true));
   const nextDisable =
@@ -50,7 +40,8 @@ const Header = ({changeMonth}) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => !nextDisable && onChangeMonth('NEXT')}
-        style={style.arrowWrapper}>
+        style={style.arrowWrapper}
+      >
         <Image
           source={require('../../assets/arrow.png')}
           style={[style.arrow, nextDisable && style.disableArrow]}
@@ -63,7 +54,8 @@ const Header = ({changeMonth}) => {
             shownAnimation,
             style.activeMonthYear,
             I18nManager.isRTL && style.reverseMonthYear,
-          ]}>
+          ]}
+        >
           <TouchableOpacity
             activeOpacity={0.7}
             style={[style.centerWrapper, style.monthYearWrapper, utils.flexDirection]}
@@ -72,7 +64,8 @@ const Header = ({changeMonth}) => {
               setMainState({
                 type: 'toggleMonth',
               })
-            }>
+            }
+          >
             <Text style={[style.headerText, style.monthText]}>
               {utils.getMonthYearText(mainState.activeDate).split(' ')[0]}
             </Text>
@@ -91,7 +84,8 @@ const Header = ({changeMonth}) => {
                 setMainState({
                   type: 'toggleTime',
                 })
-              }>
+              }
+            >
               <Text style={style.headerText}>
                 {utils.toPersianNumber(utils.getTime(mainState.activeDate))}
               </Text>
@@ -104,7 +98,8 @@ const Header = ({changeMonth}) => {
             hiddenAnimation,
             utils.flexDirection,
             I18nManager.isRTL && style.reverseMonthYear,
-          ]}>
+          ]}
+        >
           <Text style={style.headerText}>{utils.getMonthYearText(lastDate).split(' ')[0]}</Text>
           <Text style={style.headerText}>{utils.getMonthYearText(lastDate).split(' ')[1]}</Text>
           {mode === 'datepicker' && (
@@ -117,7 +112,8 @@ const Header = ({changeMonth}) => {
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() => !prevDisable && onChangeMonth('PREVIOUS')}
-        style={style.arrowWrapper}>
+        style={style.arrowWrapper}
+      >
         <Image
           source={require('../../assets/arrow.png')}
           style={[style.arrow, style.leftArrow, prevDisable && style.disableArrow]}
@@ -201,10 +197,6 @@ const styles = (theme) =>
       marginRight: 5,
     },
   });
-
-Header.defaultProps = {
-  changeMonth: () => null,
-};
 
 Header.propTypes = {
   changeMonth: PropTypes.func,

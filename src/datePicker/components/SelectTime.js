@@ -72,7 +72,8 @@ const TimeScroller = ({title, data, onChange}) => {
             ],
           },
           style.listItem,
-        ]}>
+        ]}
+      >
         <Text style={style.listItemText}>
           {utils.toPersianNumber(String(item).length === 1 ? '0' + item : item)}
         </Text>
@@ -153,10 +154,7 @@ const SelectTime = () => {
       activeDate: utils.getFormated(newTime),
       selectedDate: mainState.selectedDate
         ? utils.getFormated(
-            utils
-              .getDate(mainState.selectedDate)
-              .hour(time.hour)
-              .minute(time.minute),
+            utils.getDate(mainState.selectedDate).hour(time.hour).minute(time.minute),
           )
         : '',
     });
@@ -187,12 +185,12 @@ const SelectTime = () => {
       <TimeScroller
         title={utils.config.hour}
         data={Array.from({length: 24}, (x, i) => i)}
-        onChange={hour => setTime({...time, hour})}
+        onChange={(hour) => setTime({...time, hour})}
       />
       <TimeScroller
         title={utils.config.minute}
         data={Array.from({length: 60 / minuteInterval}, (x, i) => i * minuteInterval)}
-        onChange={minute => setTime({...time, minute})}
+        onChange={(minute) => setTime({...time, minute})}
       />
       <View style={style.footer}>
         <TouchableOpacity style={style.button} activeOpacity={0.8} onPress={selectTime}>
@@ -206,7 +204,8 @@ const SelectTime = () => {
                 type: 'toggleTime',
               })
             }
-            activeOpacity={0.8}>
+            activeOpacity={0.8}
+          >
             <Text style={style.btnText}>{utils.config.timeClose}</Text>
           </TouchableOpacity>
         )}
@@ -215,7 +214,7 @@ const SelectTime = () => {
   ) : null;
 };
 
-const styles = theme =>
+const styles = (theme) =>
   StyleSheet.create({
     container: {
       position: 'absolute',

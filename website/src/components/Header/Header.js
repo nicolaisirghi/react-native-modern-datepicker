@@ -119,7 +119,8 @@ const Header = () => {
         <a
           href="https://github.com/HosseinShabani/react-native-modern-datepicker"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           <div className="MainHeader__buttonContainer" ref={githubBtnEl}>
             <i className="icon-github MainHeader__buttonIcon"></i>
             <span className="MainHeader__buttonText">View on Github</span>

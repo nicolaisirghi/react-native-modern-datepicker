@@ -66,7 +66,7 @@ const Home = ({navigation}) => {
         <Text style={styles.title}>Modern Datepicker</Text>
       </View>
       <ScrollView>
-        {EXAMPLES.map(item => (
+        {EXAMPLES.map((item) => (
           <ExampleCard key={item.id} {...item} onPress={() => navigation.navigate(item.route)} />
         ))}
       </ScrollView>
